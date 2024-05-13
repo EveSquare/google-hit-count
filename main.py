@@ -21,15 +21,17 @@ class GoogleSearch:
             if result is None:
                 return 0
 
-            pattern = r"(\d+)\s*件"
-            match = re.search(pattern, result.replace(",", ""))
+            return self._extract_number(result)
 
-            if match:
-                number_str = match.group(1)
-                number = int(number_str)
-                return number
-            else:
-                return 0
+    def _extract_number(self, text: str) -> int:
+        pattern = r"(\d+)\s*件"
+        match = re.search(pattern, text.replace(",", ""))
+        if match:
+            number_str = match.group(1)
+            number = int(number_str)
+            return number
+        else:
+            return 0
 
 
 if __name__ == "__main__":
